@@ -1,15 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "6E+nKycE1TYsyh+s4LGwdccJwCJGxBMjMpTP9bb1Qk6R7riY8rc0YtSKnyWjKt/Bg4qc4MrwKXB88YjbNM6OsA==",
+  "dgSpecHash": "LdPtMNwW2RVTY0c3bkA30cZbDzNdIL42rwH2AV561okbOI3+Q7DFuT+MzszsnELJ4Bjl0GWjsiqBfj4znCXVcw==",
   "success": true,
   "projectFilePath": "C:\\Users\\diego\\Documents\\Uni\\ApiSysSchoolar\\ApiSysSchoolar.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\diego\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512",
+    "C:\\Users\\diego\\.nuget\\packages\\microsoft.data.sqlite.core\\9.0.0-preview.3.24172.4\\microsoft.data.sqlite.core.9.0.0-preview.3.24172.4.nupkg.sha512",
     "C:\\Users\\diego\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\diego\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\diego\\.nuget\\packages\\sqlitepclraw.core\\2.1.7\\sqlitepclraw.core.2.1.7.nupkg.sha512",
     "C:\\Users\\diego\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
     "C:\\Users\\diego\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
     "C:\\Users\\diego\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
-    "C:\\Users\\diego\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
+    "C:\\Users\\diego\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512",
+    "C:\\Users\\diego\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512"
   ],
   "logs": []
 }
