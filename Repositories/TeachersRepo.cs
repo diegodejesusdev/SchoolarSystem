@@ -2,7 +2,6 @@ using Dapper;
 using Microsoft.Data.Sqlite;
 using ApiSysSchoolar.Models;
 using ApiSysSchoolar.Repositories.Application;
-using SQLitePCL;
 
 namespace ApiSysSchoolar.Repositories;
 
