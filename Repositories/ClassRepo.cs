@@ -15,7 +15,16 @@ public class ClassRepo : IClassRepo
     
     public async Task<IEnumerable<Class>> GetAllASync()
     {
-        var sql = "SELECT scl.nameLevel, sl.nameSublevel, sj.nameSubject, th.nameTeacher, cl.classroomClass, sh.startTimeSchedule, sh.endTimeSchedule, sh.daySchedule " +
+        /*var sql = "SELECT scl.nameLevel, sl.nameSublevel, sj.nameSubject, th.nameTeacher, cl.classroomClass, sh.startTimeSchedule, sh.endTimeSchedule, sh.daySchedule " +
+                  "FROM Class cl " +
+                  "JOIN SubLevels sl ON cl.idSublevelC = sl.idSublevel " +
+                  "JOIN SchoolarLevels scl ON sl.idSchLevelS = scl.idSchoolarLevel " +
+                  "JOIN SubjectFull sf ON cl.idSubjectFullC = sf.idSubjectFull " +
+                  "JOIN Subjects sj ON sf.idSubjectSf = sj.idSubject " +
+                  "JOIN Teachers th ON sf.idTeacherSf = th.idTeacher " +
+                  "JOIN Schedules sh ON sf.idScheduleSf = sh.idSchedule";
+        */
+        var sql = "SELECT cl.*, sl.*, scl.*, sf.*, sj.*, th.*, sh.*" +
                   "FROM Class cl " +
                   "JOIN SubLevels sl ON cl.idSublevelC = sl.idSublevel " +
                   "JOIN SchoolarLevels scl ON sl.idSchLevelS = scl.idSchoolarLevel " +
@@ -26,8 +35,8 @@ public class ClassRepo : IClassRepo
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.QueryAsync<Class, SubLevels, SubjectFull, SchoolarLevels, Subjects, Teachers, Schedules, Class>(sql,
-                        (clss, sublevel, subjectFull, schoolarLevel, subject, teacher, schedules) =>
+            var result = await connection.QueryAsync<Class, SubLevels, SchoolarLevels, SubjectFull, Subjects, Teachers, Schedules, Class>(sql,
+                        (clss, sublevel, schoolarLevel, subjectFull, subject, teacher, schedules) =>
                         {
                             clss.SubLevels = sublevel;
                             clss.SubLevels.SchoolarLevels = schoolarLevel;
