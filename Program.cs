@@ -24,8 +24,6 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-//SQLitePCL.Batteries.Init();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

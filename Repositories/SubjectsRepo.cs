@@ -14,7 +14,7 @@ public class SubjectsRepo : ISubjectsRepo
     }
     public async Task<IEnumerable<Subjects>> GetAllASync()
     {
-        var sql = "SELECT s.nameSubject, s.infoSubject FROM Subjects s;";
+        var sql = "SELECT * FROM Subjects";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
@@ -25,7 +25,7 @@ public class SubjectsRepo : ISubjectsRepo
 
     public async Task<Subjects> GetByIdAsync(int id)
     {
-        var sql = "SELECT s.nameSubject, s.infoSubject FROM Subjects s WHERE idSubject = @Id";
+        var sql = "SELECT * FROM Subjects WHERE idSubject = @Id";
         using (var conneciton = new SqliteConnection(_connectionString))
         {
             conneciton.Open();
@@ -47,7 +47,7 @@ public class SubjectsRepo : ISubjectsRepo
 
     public async Task<int> UpdateAsync(Subjects entity)
     {
-        var sql = "UPDATE Subjects SET nameSubject = @nameSubject, infoSubject = @infoSubject";
+        var sql = "UPDATE Subjects SET nameSubject = @nameSubject, infoSubject = @infoSubject WHERE idSubject = @idSubject";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();

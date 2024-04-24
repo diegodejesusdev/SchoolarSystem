@@ -16,7 +16,7 @@ public class SchoolarLevelsRepo : ISchoolarLevelsRepo
     
     public async Task<IEnumerable<SchoolarLevels>> GetAllASync()
     {
-        var sql = "SELECT SchoolarLevels.nameLevel FROM SchoolarLevels";
+        var sql = "SELECT * FROM SchoolarLevels";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
@@ -27,7 +27,7 @@ public class SchoolarLevelsRepo : ISchoolarLevelsRepo
     
     public async Task<SchoolarLevels> GetByIdAsync(int id)
     {
-        var sql = "SELECT SchoolarLevels.nameLevel FROM SchoolarLevels WHERE idSchoolarLevel = @Id";
+        var sql = "SELECT * FROM SchoolarLevels WHERE idSchoolarLevel = @Id";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
@@ -49,7 +49,7 @@ public class SchoolarLevelsRepo : ISchoolarLevelsRepo
 
     public async Task<int> UpdateAsync(SchoolarLevels entity)
     {
-        var sql = "UPDATE SchoolarLevels SET nameLevel = @nameLevel";
+        var sql = "UPDATE SchoolarLevels SET nameLevel = @nameLevel WHERE idSchoolarLevel = @idSchoolarLevel";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();

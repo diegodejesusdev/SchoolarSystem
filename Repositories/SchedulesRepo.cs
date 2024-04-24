@@ -15,7 +15,7 @@ public class SchedulesRepo : ISchedulesRepo
     
     public async Task<IEnumerable<Schedules>> GetAllASync()
     {
-        var sql = "SELECT s.daySchedule, s.startTimeSchedule, s.endTimeSchedule FROM Schedules s";
+        var sql = "SELECT * FROM Schedules";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
@@ -26,7 +26,7 @@ public class SchedulesRepo : ISchedulesRepo
 
     public async Task<Schedules> GetByIdAsync(int id)
     {
-        var sql = "SELECT s.daySchedule, s.startTimeSchedule, s.endTimeSchedule FROM Schedules s WHERE idSchedule = @Id";
+        var sql = "SELECT * FROM Schedules WHERE idSchedule = @Id";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
@@ -48,7 +48,7 @@ public class SchedulesRepo : ISchedulesRepo
 
     public async Task<int> UpdateAsync(Schedules entity)
     {
-        var sql = "UPDATE Schedules SET startTimeSchedule = @startTimeSchedule, endTimeSchedule = @endTimeSchedule, daySchedule = @daySchedule";
+        var sql = "UPDATE Schedules SET startTimeSchedule = @startTimeSchedule, endTimeSchedule = @endTimeSchedule, daySchedule = @daySchedule WHERE idSchedule = @idSchedule";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();

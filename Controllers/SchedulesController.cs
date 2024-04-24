@@ -34,13 +34,18 @@ public class SchedulesController : ControllerBase
         return NoContent();
     }
 
-    [HttpPut("{id:int}")]
-    public async Task<ActionResult> Put(int id, Schedules schedules)
+    [HttpPut("{idSchedule:int}")]
+    public async Task<ActionResult> Put(int idSchedule, [FromBody] Schedules schedules)
     {
-        var ScheduleUpdate = await _schedulesRepo.GetByIdAsync(id);
+        var ScheduleUpdate = await _schedulesRepo.GetByIdAsync(idSchedule);
         if (ScheduleUpdate == null)
             return NotFound();
-        await _schedulesRepo.UpdateAsync(schedules);
+        
+        ScheduleUpdate.startTimeSchedule = schedules.startTimeSchedule;
+        ScheduleUpdate.endTimeSchedule = schedules.endTimeSchedule;
+        ScheduleUpdate.daySchedule = schedules.daySchedule;
+        
+        await _schedulesRepo.UpdateAsync(ScheduleUpdate);
         return NoContent();
     }
 

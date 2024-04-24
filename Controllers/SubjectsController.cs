@@ -33,13 +33,17 @@ public class SubjectsController : ControllerBase
         return NoContent();
     }
 
-    [HttpPut("{id:int}")]
-    public async Task<ActionResult> Put(int id, Subjects subjects)
+    [HttpPut("{idSubject:int}")]
+    public async Task<ActionResult> Put(int idSubject, [FromBody] Subjects subjects)
     {
-        var SubjectUpdate = await _subjectsRepo.GetByIdAsync(id);
+        var SubjectUpdate = await _subjectsRepo.GetByIdAsync(idSubject);
         if (SubjectUpdate == null)
             return NotFound();
-        await _subjectsRepo.UpdateAsync(subjects);
+
+        SubjectUpdate.nameSubject = subjects.nameSubject;
+        SubjectUpdate.infoSubject = subjects.infoSubject;
+        
+        await _subjectsRepo.UpdateAsync(SubjectUpdate);
         return NoContent();
     }
 

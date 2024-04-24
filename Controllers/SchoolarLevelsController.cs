@@ -33,13 +33,16 @@ public class SchoolarLevelsController : ControllerBase
         return NoContent();
     }
 
-    [HttpPut("{id:int}")]
-    public async Task<ActionResult> Put(int id, SchoolarLevels schoolarLevels)
+    [HttpPut("{idSchoolarLevel:int}")]
+    public async Task<ActionResult> Put(int idSchoolarLevel, [FromBody] SchoolarLevels schoolarLevels)
     {
-        var SchoolarLevelUpdate = await _schoolarLevelsRepo.GetByIdAsync(id);
+        var SchoolarLevelUpdate = await _schoolarLevelsRepo.GetByIdAsync(idSchoolarLevel);
         if (SchoolarLevelUpdate == null)
             return NotFound();
-        await _schoolarLevelsRepo.UpdateAsync(schoolarLevels);
+
+        SchoolarLevelUpdate.nameLevel = schoolarLevels.nameLevel;
+        
+        await _schoolarLevelsRepo.UpdateAsync(SchoolarLevelUpdate);
         return NoContent();
     }
 
