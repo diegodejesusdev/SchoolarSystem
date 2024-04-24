@@ -50,7 +50,7 @@ public class TeachersRepo : ITeachersRepo
     public async Task<int> UpdateAsync(Teachers entity)
     {
         var sql = "UPDATE Teachers SET nameTeacher = @nameTeacher, ccTeacher = @ccTeacher, emailTeacher = @emailTeacher, " +
-                  "phoneTeacher = @phoneTeacher, infoTeacher = @infoTeacher";
+                  "phoneTeacher = @phoneTeacher, infoTeacher = @infoTeacher WHERE idTeacher = @idTeacher";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
