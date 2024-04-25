@@ -15,7 +15,7 @@ public class SubLevelsRepo : ISublevelsRepo
     
     public async Task<IEnumerable<SubLevels>> GetAllASync()
     {
-        var sql = "SELECT sh.nameLevel, sl.nameSublevel, sl.yearSublevel FROM SubLevels sl " +
+        var sql = "SELECT sl.*, sh.* FROM SubLevels sl " +
                   "JOIN SchoolarLevels sh ON sl.idSchLevelS = sh.idSchoolarLevel";
         using (var connection = new SqliteConnection(_connectionString))
         {
@@ -32,7 +32,7 @@ public class SubLevelsRepo : ISublevelsRepo
 
     public async Task<SubLevels> GetByIdAsync(int id)
     {
-        var sql = "SELECT sh.nameLevel, sl.nameSublevel, sl.yearSublevel FROM SubLevels sl " +
+        var sql = "SELECT sl.*, sh.* FROM SubLevels sl " +
                   "JOIN SchoolarLevels sh ON sl.idSchLevelS = sh.idSchoolarLevel WHERE idSublevel = @Id;";
         using (var connection = new SqliteConnection(_connectionString))
         {

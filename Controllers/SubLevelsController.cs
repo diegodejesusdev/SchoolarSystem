@@ -33,13 +33,18 @@ public class SubLevelsController : ControllerBase
         return NoContent();
     }
 
-    [HttpPut("{id:int}")]
-    public async Task<ActionResult> Put(int id, SubLevels subLevels)
+    [HttpPut("{idSublevel:int}")]
+    public async Task<ActionResult> Put(int idSublevel, [FromBody] SubLevels subLevels)
     {
-        var SubLevelUpdate = await _sublevelsRepo.GetByIdAsync(id);
+        var SubLevelUpdate = await _sublevelsRepo.GetByIdAsync(idSublevel);
         if (SubLevelUpdate == null)
             return NotFound();
-        await _sublevelsRepo.UpdateAsync(subLevels);
+
+        SubLevelUpdate.nameSublevel = subLevels.nameSublevel;
+        SubLevelUpdate.yearSublevel = subLevels.yearSublevel;
+        SubLevelUpdate.idSublevel = subLevels.idSchLevelS;
+        
+        await _sublevelsRepo.UpdateAsync(SubLevelUpdate);
         return NoContent();
     }
 

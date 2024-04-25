@@ -15,8 +15,9 @@ public class StudentsRepo : IStudentsRepo
     
     public async Task<IEnumerable<Students>> GetAllASync()
     {
-        var sql = "SELECT st.nameStudent, st.ccStudent, st.emailStudent, st.phoneStudent, sc.nameLevel, sl.nameSublevel, sl.yearSublevel " +
-                  "FROM Students st JOIN SubLevels sl ON st.idSublevelS = sl.idSublevel JOIN SchoolarLevels sc ON sl.idSchLevelS = sc.idSchoolarLevel";
+        var sql = "SELECT st.*, sl.*, sc.*" +
+                  "FROM Students st JOIN SubLevels sl ON st.idSublevelS = sl.idSublevel " +
+                  "JOIN SchoolarLevels sc ON sl.idSchLevelS = sc.idSchoolarLevel";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
@@ -33,7 +34,7 @@ public class StudentsRepo : IStudentsRepo
 
     public async Task<Students> GetByIdAsync(int id)
     {
-        var sql = "SELECT st.nameStudent, st.ccStudent, st.emailStudent, st.phoneStudent, sc.nameLevel, sl.nameSublevel, sl.yearSublevel " +
+        var sql = "SELECT st.*, sl.*, sc.* " +
                   "FROM Students st JOIN SubLevels sl ON st.idSublevelS = sl.idSublevel " +
                   "JOIN SchoolarLevels sc ON sl.idSchLevelS = sc.idSchoolarLevel WHERE idStudent = @Id";
         using (var connection = new SqliteConnection(_connectionString))
@@ -65,7 +66,7 @@ public class StudentsRepo : IStudentsRepo
     public async Task<int> UpdateAsync(Students entity)
     {
         var sql = "UPDATE Students SET nameStudent = @nameStudent, ccStudent = @ccStudent, emailStudent = @emailStudent, " +
-                  "phoneStudent = @phoneStudent, idSublevelS = @idSublevelS";
+                  "phoneStudent = @phoneStudent, idSublevelS = @idSublevelS WHERE idStudent = @idStudent";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();

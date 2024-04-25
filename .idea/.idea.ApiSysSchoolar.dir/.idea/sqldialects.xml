@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/dbf67080-bd20-49d6-be3d-7dba83785a81/console_2.sql" dialect="SQLite" />
     <file url="file://$PROJECT_DIR$/Repositories/SchedulesRepo.cs" dialect="SQLite" />
   </component>
 </project>
