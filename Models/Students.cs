@@ -8,5 +8,5 @@ public class Students
     public string phoneStudent { get; set; }
     public int idSublevelS { get; set; }
 
-    public virtual SubLevels SubLevels { get; set; } = null!;
+    public virtual SchoolarLevels SchoolarLevels { get; set; } = null!;
 }

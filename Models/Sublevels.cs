@@ -5,8 +5,5 @@ public class SubLevels
     public int idSublevel { get; set; }
     public string nameSublevel { get; set; }
     public string yearSublevel { get; set; }
-    public int idSchLevelS { get; set; }
-
-    public virtual SchoolarLevels SchoolarLevels { get; set; } = null!;
 }
 

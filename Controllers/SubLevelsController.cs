@@ -42,7 +42,6 @@ public class SubLevelsController : ControllerBase
 
         SubLevelUpdate.nameSublevel = subLevels.nameSublevel;
         SubLevelUpdate.yearSublevel = subLevels.yearSublevel;
-        SubLevelUpdate.idSublevel = subLevels.idSchLevelS;
         
         await _sublevelsRepo.UpdateAsync(SubLevelUpdate);
         return NoContent();

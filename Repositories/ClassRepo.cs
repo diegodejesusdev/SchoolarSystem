@@ -15,10 +15,9 @@ public class ClassRepo : IClassRepo
     
     public async Task<IEnumerable<Class>> GetAllASync()
     {
-        var sql = "SELECT cl.*, sl.*, scl.*, sf.*, sj.*, th.*, sh.*" +
-                  "FROM Class cl " +
-                  "JOIN SubLevels sl ON cl.idSublevelC = sl.idSublevel " +
-                  "JOIN SchoolarLevels scl ON sl.idSchLevelS = scl.idSchoolarLevel " +
+        var sql = "SELECT cl.*, sl.*, scl.*, sf.*, sj.*, th.*, sh.* FROM Class cl " +
+                  "JOIN SchoolarLevels scl ON cl.idSchoolarLevelC = scl.idSchoolarLevel " +
+                  "JOIN SubLevels sl ON scl.idSublevelSL = sl.idSublevel " +
                   "JOIN SubjectFull sf ON cl.idSubjectFullC = sf.idSubjectFull " +
                   "JOIN Subjects sj ON sf.idSubjectSf = sj.idSubject " +
                   "JOIN Teachers th ON sf.idTeacherSf = th.idTeacher " +
@@ -26,53 +25,54 @@ public class ClassRepo : IClassRepo
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.QueryAsync<Class, SubLevels, SchoolarLevels, SubjectFull, Subjects, Teachers, Schedules, Class>(sql,
-                        (clss, sublevel, schoolarLevel, subjectFull, subject, teacher, schedules) =>
+            var result = 
+                await connection.QueryAsync<Class, SchoolarLevels, SubLevels, SubjectFull, Subjects, Teachers, Schedules, Class>(sql,
+                        (clss, schoolarLevel, sublevel, subjectFull, subject, teacher, schedules) =>
                         {
-                            clss.SubLevels = sublevel;
-                            clss.SubLevels.SchoolarLevels = schoolarLevel;
+                            clss.SchoolarLevels = schoolarLevel;
+                            clss.SchoolarLevels.SubLevels = sublevel;
                             clss.SubjectFull = subjectFull;
                             clss.SubjectFull.Subjects = subject;
                             clss.SubjectFull.Teachers = teacher;
                             clss.SubjectFull.Schedules = schedules;
                             return clss;
-                        }, splitOn: "idSublevel, idSchoolarLevel, idSubjectFull, idSubject, idTeacher, idSchedule");
+                        }, splitOn: "idSchoolarLevel, idSublevel, idSubjectFull, idSubject, idTeacher, idSchedule");
             return result;
         }
     }
 
     public async Task<Class> GetByIdAsync(int id)
     {
-        var sql = "SELECT cl.*, sl.*, scl.*, sf.*, sj.*, th.*, sh.* " +
-                  "FROM Class cl " +
-                  "JOIN SubLevels sl ON cl.idSublevelC = sl.idSublevel " +
-                  "JOIN SchoolarLevels scl ON sl.idSchLevelS = scl.idSchoolarLevel " +
+        var sql = "SELECT cl.*, sl.*, scl.*, sf.*, sj.*, th.*, sh.* FROM Class cl " +
+                  "JOIN SchoolarLevels scl ON cl.idSchoolarLevelC = scl.idSchoolarLevel " +
+                  "JOIN SubLevels sl ON scl.idSublevelSL = sl.idSublevel " +
                   "JOIN SubjectFull sf ON cl.idSubjectFullC = sf.idSubjectFull " +
                   "JOIN Subjects sj ON sf.idSubjectSf = sj.idSubject " +
                   "JOIN Teachers th ON sf.idTeacherSf = th.idTeacher " +
                   "JOIN Schedules sh ON sf.idScheduleSf = sh.idSchedule " +
-                  "WHERE cl.idClass = @Id";
+                  "WHERE idClass = @Id";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.QueryAsync<Class, SubLevels, SchoolarLevels, SubjectFull, Subjects, Teachers, Schedules, Class>(sql,
-                (clss, sublevel, schoolarLevel, subjectFull, subject, teacher, schedules) =>
-                {
-                    clss.SubLevels = sublevel;
-                    clss.SubLevels.SchoolarLevels = schoolarLevel;
-                    clss.SubjectFull = subjectFull;
-                    clss.SubjectFull.Subjects = subject;
-                    clss.SubjectFull.Teachers = teacher;
-                    clss.SubjectFull.Schedules = schedules;
-                    return clss;
-                }, new {Id = id},splitOn: "idSublevel, idSchoolarLevel, idSubjectFull, idSubject, idTeacher, idSchedule");
+            var result = 
+                await connection.QueryAsync<Class, SchoolarLevels, SubLevels, SubjectFull, Subjects, Teachers, Schedules, Class>(sql,
+                    (clss, schoolarLevel, sublevel, subjectFull, subject, teacher, schedules) =>
+                    {
+                        clss.SchoolarLevels = schoolarLevel;
+                        clss.SchoolarLevels.SubLevels = sublevel;
+                        clss.SubjectFull = subjectFull;
+                        clss.SubjectFull.Subjects = subject;
+                        clss.SubjectFull.Teachers = teacher;
+                        clss.SubjectFull.Schedules = schedules;
+                        return clss;
+                    }, new {Id = id},splitOn: "idSchoolarLevel, idSublevel, idSubjectFull, idSubject, idTeacher, idSchedule");
             return result.FirstOrDefault();
         }
     }
 
     public async Task<int> AddAsync(Class entity)
     {
-        var sql = "INSERT INTO Class(classroomClass, idSublevelC, idSubjectFullC) VALUES (@classroomClass, @idSublevelC, @idSubjectFullC)";
+        var sql = "INSERT INTO Class(classroomClass, idSchoolarLevelC, idSubjectFullC) VALUES (@classroomClass, @idSchoolarLevelC, @idSubjectFullC)";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
@@ -83,7 +83,8 @@ public class ClassRepo : IClassRepo
 
     public async Task<int> UpdateAsync(Class entity)
     {
-        var sql = "UPDATE Class SET classroomClass = @classroomClass, idSublevelC = @idSublevelC, idSubjectFullC = @idSubjectFullC;";
+        var sql = "UPDATE Class SET classroomClass = @classroomClass, idSchoolarLevelC = @idSchoolarLevelC, " +
+                  "idSubjectFullC = @idSubjectFullC WHERE idClass = @idClass;";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();

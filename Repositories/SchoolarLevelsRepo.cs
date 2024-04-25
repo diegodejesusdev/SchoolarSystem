@@ -38,7 +38,7 @@ public class SchoolarLevelsRepo : ISchoolarLevelsRepo
 
     public async Task<int> AddAsync(SchoolarLevels entity)
     {
-        var sql = "INSERT INTO SchoolarLevels(nameLevel) VALUES (@nameLevel);";
+        var sql = "INSERT INTO SchoolarLevels(nameLevel, idSublevelSL) VALUES (@nameLevel, @idSublevelSL)";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
@@ -49,7 +49,7 @@ public class SchoolarLevelsRepo : ISchoolarLevelsRepo
 
     public async Task<int> UpdateAsync(SchoolarLevels entity)
     {
-        var sql = "UPDATE SchoolarLevels SET nameLevel = @nameLevel WHERE idSchoolarLevel = @idSchoolarLevel";
+        var sql = "UPDATE SchoolarLevels SET nameLevel = @nameLevel, idSublevelSL = @idSublevelSL WHERE idSchoolarLevel = @idSchoolarLevel";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();

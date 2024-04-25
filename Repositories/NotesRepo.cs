@@ -15,11 +15,10 @@ public class NotesRepo : INotesRepo
     
     public async Task<IEnumerable<Notes>> GetAllASync()
     {
-        var sql = "SELECT st.nameStudent, sj.nameSubject, nt.noteN, th.nameTeacher, sc.nameLevel, sl.nameSublevel, sf.yearSf " +
-                  "FROM Notes nt " +
+        var sql = "SELECT nt.*, st.*, sc.*, sl.*, sf.*, th.*, sj.* FROM Notes nt " +
                   "JOIN Students st ON nt.idStudentN = st.idStudent " +
-                  "JOIN SubLevels sl ON st.idSublevelS = sl.idSublevel " +
-                  "JOIN SchoolarLevels sc ON sl.idSchLevelS = sc.idSchoolarLevel " +
+                  "JOIN SchoolarLevels sc ON st.idSchoolarLevelS = sc.idSchoolarLevel " +
+                  "JOIN SubLevels sl ON sc.idSublevelSL = sl.idSublevel " +
                   "JOIN SubjectFull sf ON nt.idSubjectFullN = sf.idSubjectFull " +
                   "JOIN Teachers th ON sf.idTeacherSf = th.idTeacher " +
                   "JOIN Subjects sj ON sf.idSubjectSf = sj.idSubject";
@@ -28,48 +27,47 @@ public class NotesRepo : INotesRepo
             connection.Open();
             var result =
                 await connection
-                    .QueryAsync<Notes, Students, SubLevels, SchoolarLevels, SubjectFull, Subjects, Teachers, Notes>(sql,
-                        (notes, students, sublevel, schoolarlevel, subjectfull, subject, teacher) =>
+                    .QueryAsync<Notes, Students, SchoolarLevels, SubLevels, SubjectFull, Subjects, Teachers, Notes>(sql,
+                        (notes, students, schoolarlevel, sublevel, subjectfull, subject, teacher) =>
                         {
                             notes.Students = students;
                             notes.SubjectFull = subjectfull;
-                            notes.Students.SubLevels = sublevel;
-                            notes.Students.SubLevels.SchoolarLevels = schoolarlevel;
+                            notes.Students.SchoolarLevels = schoolarlevel;
+                            notes.Students.SchoolarLevels.SubLevels = sublevel;
                             notes.SubjectFull.Subjects = subject;
                             notes.SubjectFull.Teachers = teacher;
                             return notes;
-                        }, splitOn:"idStudent, idSubjectFull, idSublevel, idSchoolarLevel, idSubject, idTeacher");
+                        }, splitOn:"idStudent, idSchoolarLevel, idSublevel, idSubjectFull, idSubject, idTeacher");
                         return result;
         }
     }
 
     public async Task<Notes> GetByIdAsync(int id)
     {
-        var sql = "SELECT st.nameStudent, sj.nameSubject, nt.noteN, th.nameTeacher, sc.nameLevel, sl.nameSublevel, sf.yearSf " +
-                  "FROM Notes nt " +
+        var sql = "SELECT nt.*, st.*, sc.*, sl.*, sf.*, th.*, sj.* FROM Notes nt " +
                   "JOIN Students st ON nt.idStudentN = st.idStudent " +
-                  "JOIN SubLevels sl ON st.idSublevelS = sl.idSublevel " +
-                  "JOIN SchoolarLevels sc ON sl.idSchLevelS = sc.idSchoolarLevel " +
+                  "JOIN SchoolarLevels sc ON st.idSchoolarLevelS = sc.idSchoolarLevel " +
+                  "JOIN SubLevels sl ON sc.idSublevelSL = sl.idSublevel " +
                   "JOIN SubjectFull sf ON nt.idSubjectFullN = sf.idSubjectFull " +
                   "JOIN Teachers th ON sf.idTeacherSf = th.idTeacher " +
                   "JOIN Subjects sj ON sf.idSubjectSf = sj.idSubject " +
-                  "WHERE nt.idNote = @Id";
+                  "WHERE idNote = @Id";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
             var result =
                 await connection
-                    .QueryAsync<Notes, Students, SubLevels, SchoolarLevels, SubjectFull, Subjects, Teachers, Notes>(sql,
-                        (notes, students, sublevel, schoolarlevel, subjectfull, subject, teacher) =>
+                    .QueryAsync<Notes, Students, SchoolarLevels, SubLevels, SubjectFull, Subjects, Teachers, Notes>(sql,
+                        (notes, students, schoolarlevel, sublevel, subjectfull, subject, teacher) =>
                         {
                             notes.Students = students;
                             notes.SubjectFull = subjectfull;
-                            notes.Students.SubLevels = sublevel;
-                            notes.Students.SubLevels.SchoolarLevels = schoolarlevel;
+                            notes.Students.SchoolarLevels = schoolarlevel;
+                            notes.Students.SchoolarLevels.SubLevels = sublevel;
                             notes.SubjectFull.Subjects = subject;
                             notes.SubjectFull.Teachers = teacher;
                             return notes;
-                        }, new {Id = id},splitOn:"idStudent, idSubjectFull, idSublevel, idSchoolarLevel, idSubject, idTeacher");
+                        }, new {Id = id}, splitOn:"idStudent, idSchoolarLevel, idSublevel, idSubjectFull, idSubject, idTeacher");
             return result.FirstOrDefault();
         }
     }
@@ -87,7 +85,7 @@ public class NotesRepo : INotesRepo
 
     public async Task<int> UpdateAsync(Notes entity)
     {
-        var sql = "UPDATE Notes SET noteN = @noteN, idStudentN = @idStudentN, idSubjectFullN = @idSubjectFullN";
+        var sql = "UPDATE Notes SET noteN = @noteN, idStudentN = @idStudentN, idSubjectFullN = @idSubjectFullN WHERE idNote = @idNote;";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();

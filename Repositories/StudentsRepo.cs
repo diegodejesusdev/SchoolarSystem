@@ -15,46 +15,47 @@ public class StudentsRepo : IStudentsRepo
     
     public async Task<IEnumerable<Students>> GetAllASync()
     {
-        var sql = "SELECT st.*, sl.*, sc.*" +
-                  "FROM Students st JOIN SubLevels sl ON st.idSublevelS = sl.idSublevel " +
-                  "JOIN SchoolarLevels sc ON sl.idSchLevelS = sc.idSchoolarLevel";
+        var sql = "SELECT st.*, sl.*, su.* FROM Students st " +
+                  "JOIN SchoolarLevels sl ON st.idSchoolarLevelS = sl.idSchoolarLevel " +
+                  "JOIN SubLevels su ON sl.idSublevelSL = su.idSublevel"; 
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.QueryAsync<Students, SubLevels, SchoolarLevels, Students>(sql,
-                (students, subLevels, schoolarLevels) =>
+            var result = await connection.QueryAsync<Students, SchoolarLevels, SubLevels, Students>(sql,
+                (students, schoolarLevels, subLevels) =>
                 {
-                    students.SubLevels = subLevels;
-                    students.SubLevels.SchoolarLevels = schoolarLevels;
+                    students.SchoolarLevels = schoolarLevels;
+                    students.SchoolarLevels.SubLevels = subLevels;
                     return students;
-                }, splitOn: "idSublevel, idSchoolarLevel");
+                }, splitOn: "idSchoolarLevel, idSublevel");
             return result;
         }
     }
 
     public async Task<Students> GetByIdAsync(int id)
     {
-        var sql = "SELECT st.*, sl.*, sc.* " +
-                  "FROM Students st JOIN SubLevels sl ON st.idSublevelS = sl.idSublevel " +
-                  "JOIN SchoolarLevels sc ON sl.idSchLevelS = sc.idSchoolarLevel WHERE idStudent = @Id";
+        var sql = "SELECT st.*, sl.*, su.* FROM Students st " +
+                  "JOIN SchoolarLevels sl ON st.idSchoolarLevelS = sl.idSchoolarLevel " +
+                  "JOIN SubLevels su ON sl.idSublevelSL = su.idSublevel WHERE idStudent = @Id"; 
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.QueryAsync<Students, SubLevels, SchoolarLevels, Students>(sql,
-                (students, subLevels, schoolarLevels) =>
+            var result = 
+                await connection.QueryAsync<Students, SchoolarLevels, SubLevels, Students>(sql,
+                (students, schoolarLevels, subLevels) =>
                 {
-                    students.SubLevels = subLevels;
-                    students.SubLevels.SchoolarLevels = schoolarLevels;
+                    students.SchoolarLevels = schoolarLevels;
+                    students.SchoolarLevels.SubLevels = subLevels;
                     return students;
-                }, new {Id = id}, splitOn: "idSublevel, idSchoolarLevel");
+                }, new {Id = id}, splitOn: "idSchoolarLevel, idSublevel");
             return result.FirstOrDefault();
         }
     }
     
     public async Task<int> AddAsync(Students entity)
     {
-        var sql = "INSERT INTO Students(nameStudent, ccStudent, emailStudent, phoneStudent, idSublevelS) " +
-                  "VALUES(@nameStudent, @ccStudent, @emailStudent, @phoneStudent, @idSublevelS)";
+        var sql = "INSERT INTO Students(nameStudent, ccStudent, emailStudent, phoneStudent, idSchoolarLevelS) " +
+                  "VALUES(@nameStudent, @ccStudent, @emailStudent, @phoneStudent, @idSchoolarLevelS)";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
@@ -65,8 +66,9 @@ public class StudentsRepo : IStudentsRepo
 
     public async Task<int> UpdateAsync(Students entity)
     {
-        var sql = "UPDATE Students SET nameStudent = @nameStudent, ccStudent = @ccStudent, emailStudent = @emailStudent, " +
-                  "phoneStudent = @phoneStudent, idSublevelS = @idSublevelS WHERE idStudent = @idStudent";
+        var sql = "UPDATE Students SET nameStudent = @nameStudent, ccStudent = @ccStudent, " +
+                  "emailStudent = @emailStudent, phoneStudent = @phoneStudent, idSchoolarLevelS = @idSchoolarLevelS " +
+                  "WHERE idStudent = @idStudent";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
