@@ -34,13 +34,18 @@ public class NotesController : ControllerBase
         return NoContent();
     }
 
-    [HttpPut("{id:int}")]
-    public async Task<ActionResult> Put(int id, Notes notes)
+    [HttpPut("{idNote:int}")]
+    public async Task<ActionResult> Put(int idNote, [FromBody] Notes notes)
     {
-        var NotesUpdate = await _notesRepo.GetByIdAsync(id);
+        var NotesUpdate = await _notesRepo.GetByIdAsync(idNote);
         if (NotesUpdate == null)
             return NotFound();
-        await _notesRepo.UpdateAsync(notes);
+
+        NotesUpdate.noteN = notes.noteN;
+        NotesUpdate.idStudentN = notes.idStudentN;
+        NotesUpdate.idSubjectFullN = notes.idSubjectFullN;
+        
+        await _notesRepo.UpdateAsync(NotesUpdate);
         return NoContent();
     }
 

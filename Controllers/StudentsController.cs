@@ -33,13 +33,20 @@ public class StudentsController : ControllerBase
         return NoContent();
     }
 
-    [HttpPut("{id:int}")]
-    public async Task<ActionResult> Put(int id, Students students)
+    [HttpPut("{idStudent:int}")]
+    public async Task<ActionResult> Put(int idStudent, [FromBody] Students students)
     {
-        var StudentsUpdate = await _studentsRepo.GetByIdAsync(id);
-        if (StudentsUpdate == null)
+        var StudentsUpdate = await _studentsRepo.GetByIdAsync(idStudent);
+        if (StudentsUpdate == null) 
             return NotFound();
-        await _studentsRepo.UpdateAsync(students);
+
+        StudentsUpdate.nameStudent = students.nameStudent;
+        StudentsUpdate.ccStudent = students.ccStudent;
+        StudentsUpdate.emailStudent = students.emailStudent;
+        StudentsUpdate.phoneStudent = students.phoneStudent;
+        StudentsUpdate.idSchoolarLevelS = students.idSchoolarLevelS;
+        
+        await _studentsRepo.UpdateAsync(StudentsUpdate);
         return NoContent();
     }
 

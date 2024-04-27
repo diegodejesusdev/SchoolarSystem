@@ -41,6 +41,7 @@ public class SchoolarLevelsController : ControllerBase
             return NotFound();
 
         SchoolarLevelUpdate.nameLevel = schoolarLevels.nameLevel;
+        SchoolarLevelUpdate.idSublevelSL = schoolarLevels.idSublevelSL;
         
         await _schoolarLevelsRepo.UpdateAsync(SchoolarLevelUpdate);
         return NoContent();

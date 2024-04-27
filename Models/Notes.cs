@@ -7,7 +7,7 @@ public class Notes
     public int idStudentN { get; set; }
     public int idSubjectFullN { get; set; }
 
-    public virtual Students Students { get; set; } = null!;
-    public virtual SubjectFull SubjectFull { get; set; } = null!;
+    public virtual Students? Students { get; set; }
+    public virtual SubjectFull? SubjectFull { get; set; }
 }
 

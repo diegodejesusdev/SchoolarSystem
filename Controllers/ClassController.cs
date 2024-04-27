@@ -33,13 +33,18 @@ public class ClassController : ControllerBase
         return NoContent();
     }
 
-    [HttpPut("{id:int}")]
-    public async Task<ActionResult> Put(int id, Class clss)
+    [HttpPut("{idClass:int}")]
+    public async Task<ActionResult> Put(int idClass, [FromBody] Class clss)
     {
-        var ClassUpdate = await _classRepo.GetByIdAsync(id);
+        var ClassUpdate = await _classRepo.GetByIdAsync(idClass);
         if (ClassUpdate == null)
             return NotFound();
-        await _classRepo.UpdateAsync(clss);
+
+        ClassUpdate.classroomClass = clss.classroomClass;
+        ClassUpdate.idSchoolarLevelC = clss.idSchoolarLevelC;
+        ClassUpdate.idSubjectFullC = clss.idSubjectFullC;
+        
+        await _classRepo.UpdateAsync(ClassUpdate);
         return NoContent();
     }
 

@@ -15,7 +15,7 @@ public class NotesRepo : INotesRepo
     
     public async Task<IEnumerable<Notes>> GetAllASync()
     {
-        var sql = "SELECT nt.*, st.*, sc.*, sl.*, sf.*, th.*, sj.* FROM Notes nt " +
+        var sql = "SELECT * FROM Notes nt " +
                   "JOIN Students st ON nt.idStudentN = st.idStudent " +
                   "JOIN SchoolarLevels sc ON st.idSchoolarLevelS = sc.idSchoolarLevel " +
                   "JOIN SubLevels sl ON sc.idSublevelSL = sl.idSublevel " +
@@ -27,24 +27,24 @@ public class NotesRepo : INotesRepo
             connection.Open();
             var result =
                 await connection
-                    .QueryAsync<Notes, Students, SchoolarLevels, SubLevels, SubjectFull, Subjects, Teachers, Notes>(sql,
-                        (notes, students, schoolarlevel, sublevel, subjectfull, subject, teacher) =>
+                    .QueryAsync<Notes, Students, SchoolarLevels, SubLevels, SubjectFull, Teachers, Subjects, Notes>(sql,
+                        (notes, students, schoolarlevel, sublevel, subjectfull, teacher, subject) =>
                         {
                             notes.Students = students;
-                            notes.SubjectFull = subjectfull;
                             notes.Students.SchoolarLevels = schoolarlevel;
                             notes.Students.SchoolarLevels.SubLevels = sublevel;
-                            notes.SubjectFull.Subjects = subject;
+                            notes.SubjectFull = subjectfull;
                             notes.SubjectFull.Teachers = teacher;
+                            notes.SubjectFull.Subjects = subject;
                             return notes;
-                        }, splitOn:"idStudent, idSchoolarLevel, idSublevel, idSubjectFull, idSubject, idTeacher");
+                        }, splitOn:"idStudent, idSchoolarLevel, idSublevel, idSubjectFull, idTeacher, idSubject");
                         return result;
         }
     }
 
     public async Task<Notes> GetByIdAsync(int id)
     {
-        var sql = "SELECT nt.*, st.*, sc.*, sl.*, sf.*, th.*, sj.* FROM Notes nt " +
+        var sql = "SELECT * FROM Notes nt " +
                   "JOIN Students st ON nt.idStudentN = st.idStudent " +
                   "JOIN SchoolarLevels sc ON st.idSchoolarLevelS = sc.idSchoolarLevel " +
                   "JOIN SubLevels sl ON sc.idSublevelSL = sl.idSublevel " +
@@ -57,17 +57,18 @@ public class NotesRepo : INotesRepo
             connection.Open();
             var result =
                 await connection
-                    .QueryAsync<Notes, Students, SchoolarLevels, SubLevels, SubjectFull, Subjects, Teachers, Notes>(sql,
-                        (notes, students, schoolarlevel, sublevel, subjectfull, subject, teacher) =>
+                    .QueryAsync<Notes, Students, SchoolarLevels, SubLevels, SubjectFull, Teachers, Subjects, Notes>(sql,
+                        (notes, students, schoolarlevel, sublevel, subjectfull, teacher, subject) =>
                         {
                             notes.Students = students;
-                            notes.SubjectFull = subjectfull;
                             notes.Students.SchoolarLevels = schoolarlevel;
                             notes.Students.SchoolarLevels.SubLevels = sublevel;
-                            notes.SubjectFull.Subjects = subject;
+                            notes.SubjectFull = subjectfull;
                             notes.SubjectFull.Teachers = teacher;
+                            notes.SubjectFull.Subjects = subject;
                             return notes;
-                        }, new {Id = id}, splitOn:"idStudent, idSchoolarLevel, idSublevel, idSubjectFull, idSubject, idTeacher");
+                        }, new {Id = id} ,
+                        splitOn:"idStudent, idSchoolarLevel, idSublevel, idSubjectFull, idTeacher, idSubject");
             return result.FirstOrDefault();
         }
     }
@@ -75,21 +76,38 @@ public class NotesRepo : INotesRepo
     public async Task<int> AddAsync(Notes entity)
     {
         var sql = "INSERT INTO Notes(noteN, idStudentN, idSubjectFullN) VALUES (@noteN, @idStudentN, @idSubjectFullN)";
+
+        var parameters = new
+        {
+            entity.noteN,
+            entity.idStudentN,
+            entity.idSubjectFullN
+        };
+        
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.ExecuteAsync(sql, entity);
+            var result = await connection.ExecuteAsync(sql, parameters);
             return result;
         }
     }
 
     public async Task<int> UpdateAsync(Notes entity)
     {
-        var sql = "UPDATE Notes SET noteN = @noteN, idStudentN = @idStudentN, idSubjectFullN = @idSubjectFullN WHERE idNote = @idNote;";
+        var sql = "UPDATE Notes SET noteN = @noteN, idStudentN = @idStudentN, idSubjectFullN = @idSubjectFullN WHERE idNote = @idNote";
+
+        var parameters = new
+        {
+            entity.noteN,
+            entity.idStudentN,
+            entity.idSubjectFullN,
+            entity.idNote
+        };
+        
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.ExecuteAsync(sql, entity);
+            var result = await connection.ExecuteAsync(sql, parameters);
             return result;
         }
     }

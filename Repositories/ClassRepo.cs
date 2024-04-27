@@ -15,7 +15,7 @@ public class ClassRepo : IClassRepo
     
     public async Task<IEnumerable<Class>> GetAllASync()
     {
-        var sql = "SELECT cl.*, sl.*, scl.*, sf.*, sj.*, th.*, sh.* FROM Class cl " +
+        var sql = "SELECT cl.*, scl.*, sl.*, sf.*, sj.*, th.*, sh.* FROM Class cl " +
                   "JOIN SchoolarLevels scl ON cl.idSchoolarLevelC = scl.idSchoolarLevel " +
                   "JOIN SubLevels sl ON scl.idSublevelSL = sl.idSublevel " +
                   "JOIN SubjectFull sf ON cl.idSubjectFullC = sf.idSubjectFull " +
@@ -26,7 +26,7 @@ public class ClassRepo : IClassRepo
         {
             connection.Open();
             var result = 
-                await connection.QueryAsync<Class, SchoolarLevels, SubLevels, SubjectFull, Subjects, Teachers, Schedules, Class>(sql,
+                await connection.QueryAsync<Class, SchoolarLevels, SubLevels, SubjectFull, Subjects, Teachers, Schedules, Class>(sql, 
                         (clss, schoolarLevel, sublevel, subjectFull, subject, teacher, schedules) =>
                         {
                             clss.SchoolarLevels = schoolarLevel;
@@ -36,14 +36,15 @@ public class ClassRepo : IClassRepo
                             clss.SubjectFull.Teachers = teacher;
                             clss.SubjectFull.Schedules = schedules;
                             return clss;
-                        }, splitOn: "idSchoolarLevel, idSublevel, idSubjectFull, idSubject, idTeacher, idSchedule");
+                        }, 
+                        splitOn: "idSchoolarLevel, idSublevel, idSubjectFull, idSubject, idTeacher, idSchedule");
             return result;
         }
     }
 
     public async Task<Class> GetByIdAsync(int id)
     {
-        var sql = "SELECT cl.*, sl.*, scl.*, sf.*, sj.*, th.*, sh.* FROM Class cl " +
+        var sql = "SELECT cl.*, scl.*, sl.*, sf.*, sj.*, th.*, sh.* FROM Class cl " +
                   "JOIN SchoolarLevels scl ON cl.idSchoolarLevelC = scl.idSchoolarLevel " +
                   "JOIN SubLevels sl ON scl.idSublevelSL = sl.idSublevel " +
                   "JOIN SubjectFull sf ON cl.idSubjectFullC = sf.idSubjectFull " +
@@ -55,7 +56,7 @@ public class ClassRepo : IClassRepo
         {
             connection.Open();
             var result = 
-                await connection.QueryAsync<Class, SchoolarLevels, SubLevels, SubjectFull, Subjects, Teachers, Schedules, Class>(sql,
+                await connection.QueryAsync<Class, SchoolarLevels, SubLevels, SubjectFull, Subjects, Teachers, Schedules, Class>(sql, 
                     (clss, schoolarLevel, sublevel, subjectFull, subject, teacher, schedules) =>
                     {
                         clss.SchoolarLevels = schoolarLevel;
@@ -65,18 +66,28 @@ public class ClassRepo : IClassRepo
                         clss.SubjectFull.Teachers = teacher;
                         clss.SubjectFull.Schedules = schedules;
                         return clss;
-                    }, new {Id = id},splitOn: "idSchoolarLevel, idSublevel, idSubjectFull, idSubject, idTeacher, idSchedule");
+                    }, new {Id = id},
+                    splitOn: "idSchoolarLevel, idSublevel, idSubjectFull, idSubject, idTeacher, idSchedule");
             return result.FirstOrDefault();
         }
     }
 
     public async Task<int> AddAsync(Class entity)
     {
-        var sql = "INSERT INTO Class(classroomClass, idSchoolarLevelC, idSubjectFullC) VALUES (@classroomClass, @idSchoolarLevelC, @idSubjectFullC)";
+        var sql = "INSERT INTO Class(classroomClass, idSchoolarLevelC, idSubjectFullC) " +
+                  "VALUES (@classroomClass, @idSchoolarLevelC, @idSubjectFullC)";
+
+        var parameters = new
+        {
+            entity.classroomClass,
+            entity.idSchoolarLevelC,
+            entity.idSubjectFullC
+        };
+        
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.ExecuteAsync(sql, entity);
+            var result = await connection.ExecuteAsync(sql, parameters);
             return result;
         }
     }
@@ -85,10 +96,19 @@ public class ClassRepo : IClassRepo
     {
         var sql = "UPDATE Class SET classroomClass = @classroomClass, idSchoolarLevelC = @idSchoolarLevelC, " +
                   "idSubjectFullC = @idSubjectFullC WHERE idClass = @idClass;";
+
+        var parameters = new
+        {
+            entity.classroomClass,
+            entity.idSchoolarLevelC,
+            entity.idSubjectFullC,
+            entity.idClass
+        };
+        
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.ExecuteAsync(sql, entity);
+            var result = await connection.ExecuteAsync(sql, parameters);
             return result;
         }
     }

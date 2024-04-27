@@ -33,13 +33,19 @@ public class SubjectFullController : ControllerBase
         return NoContent();
     }
 
-    [HttpPut("{id:int}")]
-    public async Task<ActionResult> Put(int id, SubjectFull subjectFull)
+    [HttpPut("{idSubjectFull:int}")]
+    public async Task<ActionResult> Put(int idSubjectFull, SubjectFull subjectFull)
     {
-        var SubjectFullUpdate = await _subjectFullRepo.GetByIdAsync(id);
+        var SubjectFullUpdate = await _subjectFullRepo.GetByIdAsync(idSubjectFull);
         if (SubjectFullUpdate == null)
             return NotFound();
-        await _subjectFullRepo.UpdateAsync(subjectFull);
+
+        SubjectFullUpdate.yearSf = subjectFull.yearSf;
+        SubjectFullUpdate.idScheduleSf = subjectFull.idScheduleSf;
+        SubjectFullUpdate.idSubjectSf = subjectFull.idSubjectSf;
+        SubjectFullUpdate.idTeacherSf = subjectFull.idTeacherSf;
+        
+        await _subjectFullRepo.UpdateAsync(SubjectFullUpdate);
         return NoContent();
     }
 

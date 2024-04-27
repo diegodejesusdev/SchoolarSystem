@@ -15,8 +15,8 @@ public class SubjectFullRepo : ISubjectFullRepo
     
     public async Task<IEnumerable<SubjectFull>> GetAllASync()
     {
-        var sql = "SELECT sj.nameSubject, th.nameTeacher, sc.daySchedule, sc.startTimeSchedule, sc.endTimeSchedule, sf.yearSf " +
-                  "FROM SubjectFull sf JOIN Schedules sc ON sf.idScheduleSf = sc.idSchedule " +
+        var sql = "SELECT * FROM SubjectFull sf " +
+                  "JOIN Schedules sc ON sf.idScheduleSf = sc.idSchedule " +
                   "JOIN Subjects sj ON sf.idSubjectSf = sj.idSubject " +
                   "JOIN Teachers th ON sf.idTeacherSf = th.idTeacher";
         using (var connection = new SqliteConnection(_connectionString))
@@ -38,11 +38,11 @@ public class SubjectFullRepo : ISubjectFullRepo
 
     public async Task<SubjectFull> GetByIdAsync(int id)
     {
-        var sql = "SELECT sj.nameSubject, th.nameTeacher, sc.daySchedule, sc.startTimeSchedule, sc.endTimeSchedule, sf.yearSf " +
-                  "FROM SubjectFull sf JOIN Schedules sc ON sf.idScheduleSf = sc.idSchedule " +
+        var sql = "SELECT * FROM SubjectFull sf " +
+                  "JOIN Schedules sc ON sf.idScheduleSf = sc.idSchedule " +
                   "JOIN Subjects sj ON sf.idSubjectSf = sj.idSubject " +
                   "JOIN Teachers th ON sf.idTeacherSf = th.idTeacher " +
-                  "WHERE sf.idSubjectFull = @Id";
+                  "WHERE idSubjectFull = @Id";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
@@ -55,8 +55,9 @@ public class SubjectFullRepo : ISubjectFullRepo
                             fullSubject.Subjects = subjects;
                             fullSubject.Teachers = teachers;
                             return fullSubject;
-                        }, new {Id = id},splitOn: "idSchedule, idSubject, idTeacher");
-                        return result.FirstOrDefault();
+                        }, new {Id = id}, 
+                        splitOn: "idSchedule, idSubject, idTeacher");
+            return result.FirstOrDefault();
         }
     }
 
@@ -64,10 +65,19 @@ public class SubjectFullRepo : ISubjectFullRepo
     {
         var sql = "INSERT INTO SubjectFull(yearSf, idScheduleSf, idSubjectSf, idTeacherSf) " +
                   "VALUES (@yearSf, @idScheduleSf, @idSubjectSf, @idTeacherSf)";
+
+        var parameters = new
+        {
+            entity.yearSf,
+            entity.idScheduleSf,
+            entity.idSubjectSf,
+            entity.idTeacherSf
+        };
+        
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.ExecuteAsync(sql, entity);
+            var result = await connection.ExecuteAsync(sql, parameters);
             return result;
         }
     }
@@ -75,11 +85,21 @@ public class SubjectFullRepo : ISubjectFullRepo
     public async Task<int> UpdateAsync(SubjectFull entity)
     {
         var sql = "UPDATE SubjectFull SET yearSf = @yearSf, idScheduleSf = @idScheduleSf, " +
-                  "idSubjectSf = @idSubjectSf, idTeacherSf = @idTeacherSf";
+                  "idSubjectSf = @idSubjectSf, idTeacherSf = @idTeacherSf WHERE idSubjectFull = @idSubjectFull";
+        
+        var parameters = new
+        {
+            entity.yearSf,
+            entity.idScheduleSf,
+            entity.idSubjectSf,
+            entity.idTeacherSf,
+            entity.idSubjectFull
+        };
+        
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.ExecuteAsync(sql, entity);
+            var result = await connection.ExecuteAsync(sql, parameters);
             return result;
         }
     }
