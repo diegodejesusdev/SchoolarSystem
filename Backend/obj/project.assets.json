@@ -796,11 +796,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\diego\\Documents\\Uni\\ApiSysSchoolar\\ApiSysSchoolar.csproj",
+      "projectUniqueName": "C:\\Users\\diego\\Documents\\Uni\\SchoolarSystem\\Backend\\ApiSysSchoolar.csproj",
       "projectName": "ApiSysSchoolar",
-      "projectPath": "C:\\Users\\diego\\Documents\\Uni\\ApiSysSchoolar\\ApiSysSchoolar.csproj",
+      "projectPath": "C:\\Users\\diego\\Documents\\Uni\\SchoolarSystem\\Backend\\ApiSysSchoolar.csproj",
       "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\diego\\Documents\\Uni\\ApiSysSchoolar\\obj\\",
+      "outputPath": "C:\\Users\\diego\\Documents\\Uni\\SchoolarSystem\\Backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config"

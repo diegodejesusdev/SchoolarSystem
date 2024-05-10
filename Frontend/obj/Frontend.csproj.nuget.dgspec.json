@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\diego\\Documents\\Uni\\SchoolarSystem\\Backend\\ApiSysSchoolar.csproj": {}
+    "C:\\Users\\diego\\Documents\\Uni\\SchoolarSystem\\Frontend\\Frontend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\diego\\Documents\\Uni\\SchoolarSystem\\Backend\\ApiSysSchoolar.csproj": {
+    "C:\\Users\\diego\\Documents\\Uni\\SchoolarSystem\\Frontend\\Frontend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\diego\\Documents\\Uni\\SchoolarSystem\\Backend\\ApiSysSchoolar.csproj",
-        "projectName": "ApiSysSchoolar",
-        "projectPath": "C:\\Users\\diego\\Documents\\Uni\\SchoolarSystem\\Backend\\ApiSysSchoolar.csproj",
+        "projectUniqueName": "C:\\Users\\diego\\Documents\\Uni\\SchoolarSystem\\Frontend\\Frontend.csproj",
+        "projectName": "Frontend",
+        "projectPath": "C:\\Users\\diego\\Documents\\Uni\\SchoolarSystem\\Frontend\\Frontend.csproj",
         "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\diego\\Documents\\Uni\\SchoolarSystem\\Backend\\obj\\",
+        "outputPath": "C:\\Users\\diego\\Documents\\Uni\\SchoolarSystem\\Frontend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -38,21 +38,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Dapper": {
+            "Microsoft.AspNetCore.Components.WebAssembly": {
               "target": "Package",
-              "version": "[2.1.35, )"
+              "version": "[6.0.29, )"
             },
-            "Microsoft.Data.Sqlite": {
+            "Microsoft.AspNetCore.Components.WebAssembly.DevServer": {
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.0-preview.3.24172.4, )"
-            },
-            "Microsoft.Data.Sqlite.Core": {
-              "target": "Package",
-              "version": "[9.0.0-preview.3.24172.4, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[6.5.0, )"
+              "version": "[6.0.29, )"
             }
           },
           "imports": [
@@ -66,15 +59,23 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
+              "version": "[6.0.29, 6.0.29]"
+            }
+          ],
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.421\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "browser-wasm": {
+          "#import": []
         }
       }
     }
