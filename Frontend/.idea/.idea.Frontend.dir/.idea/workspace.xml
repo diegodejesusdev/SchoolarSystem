@@ -9,33 +9,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f67b945-b3d9-416e-92b7-df8bd7f854b1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Frontend.dir/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Frontend.dir/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/FetchData.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/FetchData.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/.idea/.idea.Backend/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/.idea/.idea.Backend/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/.idea/.idea.Backend/.idea/indexLayout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/.idea/.idea.Backend/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/obj/Backend.csproj.nuget.dgspec.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/obj/Backend.csproj.nuget.g.props" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/obj/Backend.csproj.nuget.g.targets" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/obj/Debug/net6.0/Backend.GlobalUsings.g.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/obj/Debug/net6.0/Backend.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/ApiSysSchoolar.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/Backend.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/Backend.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/Backend.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/identifier.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/obj/Debug/net6.0/Backend.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/obj/ApiSysSchoolar.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/obj/ApiSysSchoolar.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/obj/Debug/net6.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/obj/Debug/net6.0/apphost.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/obj/staticwebassets.pack.sentinel" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/obj/staticwebassets.pack.sentinel" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Frontend.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Frontend.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Students.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Students.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shared/MainLayout.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/MainLayout.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shared/MainLayout.razor.css" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/MainLayout.razor.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shared/SurveyPrompt.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/SurveyPrompt.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_Imports.razor" beforeDir="false" afterPath="$PROJECT_DIR$/_Imports.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/SchoolarLevelsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/SchoolarLevelsService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/StudentsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/StudentsService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/SubLevelsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/SubLevelsService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/Frontend.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/Frontend.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/Frontend.GlobalUsings.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/Frontend.GlobalUsings.g.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/Frontend.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/Frontend.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/Frontend.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/Frontend.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/Frontend.csproj.FileListAbsolute.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Frontend.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Frontend.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Frontend.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Frontend.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Frontend.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Frontend.csproj.nuget.g.targets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/Frontend.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/Frontend.csproj.FileListAbsolute.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wwwroot/css/app.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wwwroot/icon-192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wwwroot/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wwwroot/sample-data/weather.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,11 +49,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2gIs2r5SMtqUthcCssifOTI9O6v" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -63,6 +70,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -113,7 +121,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1715396223664</updated>
-      <workItem from="1715396226873" duration="427000" />
+      <workItem from="1715396226873" duration="574000" />
+      <workItem from="1715468339584" duration="154000" />
+      <workItem from="1715711019320" duration="5219000" />
     </task>
     <servers />
   </component>
@@ -123,5 +133,9 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

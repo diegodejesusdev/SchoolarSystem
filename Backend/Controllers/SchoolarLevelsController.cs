@@ -4,7 +4,7 @@ using ApiSysSchoolar.Repositories.Application;
 
 namespace ApiSysSchoolar.Controllers;
 [ApiController]
-[Route("[controller]")]
+[Route("scholar/[controller]")]
 public class SchoolarLevelsController : ControllerBase
 {
     private readonly ISchoolarLevelsRepo _schoolarLevelsRepo;

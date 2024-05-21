@@ -12,9 +12,9 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 
-builder.Services.AddHttpClient<ISubLevelsService, SubLevelsService>(client => client.BaseAddress = new Uri(""));
-builder.Services.AddHttpClient<ISchoolarLevelsService, SchoolarLevelsService>(client => client.BaseAddress = new Uri(""));
-builder.Services.AddHttpClient<IStudentsService, StudentsService>(client => client.BaseAddress = new Uri(""));
+builder.Services.AddHttpClient<ISubLevelsService, SubLevelsService>(client => client.BaseAddress = new Uri("https://localhost:7193"));
+builder.Services.AddHttpClient<ISchoolarLevelsService, SchoolarLevelsService>(client => client.BaseAddress = new Uri("https://localhost:7193"));
+builder.Services.AddHttpClient<IStudentsService, StudentsService>(client => client.BaseAddress = new Uri("https://localhost:7193"));
 
 builder.Services.AddBlazoredToast();
 builder.Services.AddBlazoredModal();

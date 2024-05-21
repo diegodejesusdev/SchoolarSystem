@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lH0Ikldb5aPBLpUY9Gm/9d+eiDNWbIvZWiqV1bSv3a2KxKH9wbPTXUO1SYGVZWyBI3wKwOJy0sbQoK9ar8SK8w==",
+  "dgSpecHash": "LwNaIfuDsWQuFxQ4QDHilFRZMm0jVkJfBudOXeSNfAk1GG7rOS1JkoBuZpxQ/phUvE35vSItmpaoTCHsStO84A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\diego\\Documents\\Uni\\SchoolarSystem\\Backend\\ApiSysSchoolar.csproj",
+  "projectFilePath": "C:\\Users\\diego\\Documents\\Uni\\SchoolarSystem\\Backend\\Backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\diego\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512",
     "C:\\Users\\diego\\.nuget\\packages\\microsoft.data.sqlite\\9.0.0-preview.3.24172.4\\microsoft.data.sqlite.9.0.0-preview.3.24172.4.nupkg.sha512",

@@ -22,29 +22,29 @@ public class StudentsService : IStudentsService
 
     async Task<List<Students>> IStudentsService.GetStudents()
     {
-        return await HttpClient.GetFromJsonAsync<List<Students>>("schoolar/Students");
+        return await HttpClient.GetFromJsonAsync<List<Students>>("scholar/Students");
     }
 
     async Task<Students> IStudentsService.GetStudent(int id)
     {
-        return await HttpClient.GetFromJsonAsync<Students>($"schoolar/Students/{id}");
+        return await HttpClient.GetFromJsonAsync<Students>($"scholar/Students/{id}");
     }
 
     async Task<Students> IStudentsService.AddStudent(Students students)
     {
-        var result = await HttpClient.PostAsJsonAsync<Students>($"schoolar/Students", students);
+        var result = await HttpClient.PostAsJsonAsync<Students>($"scholar/Students", students);
         var newStudent = await result.Content.ReadFromJsonAsync<Students>();
         return newStudent;
     }
 
     async Task IStudentsService.UpdateStudent(int id, Students students)
     {
-        await HttpClient.PutAsJsonAsync<Students>($"schoolar/Students?id={id}", students);
+        await HttpClient.PutAsJsonAsync<Students>($"scholar/Students?id={id}", students);
     }
 
     public async Task DeleteStudent(int id)
     {
         Console.WriteLine(id);
-        await HttpClient.DeleteAsync($"schoolar/Students/{id}");
+        await HttpClient.DeleteAsync($"scholar/Students/{id}");
     }
 }

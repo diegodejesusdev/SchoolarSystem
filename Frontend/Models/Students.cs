@@ -2,7 +2,7 @@
 
 namespace Frontend.Models;
 
-public class Students
+public class  Students
 {
     public int idStudent { get; set; }
     [Required (ErrorMessage = "Name is required")]

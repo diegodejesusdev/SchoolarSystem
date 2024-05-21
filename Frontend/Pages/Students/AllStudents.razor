@@ -1,0 +1,73 @@
+﻿@page "/AllStudents"
+
+@using Frontend.Models
+@using Frontend.Services
+
+@inject NavigationManager Navigation
+@inject IStudentsService _StudentsService
+
+<div class="container-fluid">
+    
+    <div class="row">
+        <h3>Students List</h3>
+        <button type="button" class="btn btn-sm btn-success" @onclick='() => Navigation.NavigateTo("students/addStudent>")'><i class="fas fa-plus pr-2"></i>Create</button>
+    </div>
+    
+    <div class="row">
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Identification</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>School Level</th>
+                <th>SubSchool Level</th>
+            </tr>
+            </thead>
+            <tbody>
+                @if (!_studentsList.Any())
+                {
+                    <tr>
+                        <button class="btn btn-primary" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            <span class="visually-hidden">Loading...</span>
+                        </button>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var student in _studentsList)
+                    {
+                        <tr @onclick="() => RedirectTo(student.idStudent)" class="cursor-pointer"> 
+                            <td>@student.idStudent</td>
+                            <td>@student.nameStudent</td>
+                            <td>@student.ccStudent</td>
+                            <td>@student.emailStudent</td>
+                            <td>@student.phoneStudent</td>
+                            <td>@student.SchoolarLevels</td>
+                            <td>@student.SchoolarLevels.SubLevels</td>
+S                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@code {
+    private List<Students> _studentsList = new List<Students>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        _studentsList = await _StudentsService.GetStudents();
+    }
+
+    private void RedirectTo(int idStudent)
+    {
+        Navigation.NavigateTo($"/students/{idStudent}");
+    }
+}

@@ -22,6 +22,6 @@ public class SubLevelsService : ISubLevelsService
     
     async Task<List<SubLevels>> ISubLevelsService.GetSubLevels()
     {
-        return await HttpClient.GetFromJsonAsync<List<SubLevels>>("schoolar/Sublevels");
+        return await HttpClient.GetFromJsonAsync<List<SubLevels>>("scholar/Sublevels");
     }
 }

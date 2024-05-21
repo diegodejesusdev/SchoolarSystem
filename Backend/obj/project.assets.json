@@ -796,9 +796,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\diego\\Documents\\Uni\\SchoolarSystem\\Backend\\ApiSysSchoolar.csproj",
-      "projectName": "ApiSysSchoolar",
-      "projectPath": "C:\\Users\\diego\\Documents\\Uni\\SchoolarSystem\\Backend\\ApiSysSchoolar.csproj",
+      "projectUniqueName": "C:\\Users\\diego\\Documents\\Uni\\SchoolarSystem\\Backend\\Backend.csproj",
+      "projectName": "Backend",
+      "projectPath": "C:\\Users\\diego\\Documents\\Uni\\SchoolarSystem\\Backend\\Backend.csproj",
       "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\diego\\Documents\\Uni\\SchoolarSystem\\Backend\\obj\\",
       "projectStyle": "PackageReference",
@@ -863,7 +863,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.421\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.422\\RuntimeIdentifierGraph.json"
       }
     }
   }
