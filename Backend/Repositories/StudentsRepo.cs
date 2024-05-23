@@ -17,12 +17,13 @@ public class StudentsRepo : IStudentsRepo
     {
         var sql = "SELECT * FROM Students st " +
                   "JOIN SchoolarLevels sl ON st.idSchoolarLevelS = sl.idSchoolarLevel " +
-                  "JOIN SubLevels su ON sl.idSublevelSL = su.idSublevel"; 
+                  "JOIN SubLevels su ON sl.idSublevelSL = su.idSublevel";
+        
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
             var result = await connection.QueryAsync<Students, SchoolarLevels, SubLevels, Students>(sql,
-                (students, schoolarLevels, subLevels) =>
+                map: (students, schoolarLevels, subLevels) =>
                 {
                     students.SchoolarLevels = schoolarLevels;
                     students.SchoolarLevels.SubLevels = subLevels;

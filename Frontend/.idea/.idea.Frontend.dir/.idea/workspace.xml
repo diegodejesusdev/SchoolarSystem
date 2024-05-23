@@ -9,37 +9,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f67b945-b3d9-416e-92b7-df8bd7f854b1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Backend/.idea/.idea.Backend/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/.idea/.idea.Backend/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/.idea/.idea.Backend/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/.idea/.idea.Backend/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/obj/Backend.csproj.nuget.dgspec.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/obj/Backend.csproj.nuget.g.props" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/obj/Backend.csproj.nuget.g.targets" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/obj/Debug/net6.0/Backend.GlobalUsings.g.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/obj/Debug/net6.0/Backend.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/ApiSysSchoolar.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/Backend.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/Backend.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/Backend.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/identifier.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/obj/Debug/net6.0/Backend.csproj.FileListAbsolute.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/obj/ApiSysSchoolar.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/obj/ApiSysSchoolar.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/Repositories/StudentsRepo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/Repositories/StudentsRepo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/obj/Debug/net6.0/Backend.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/obj/Debug/net6.0/Backend.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/obj/Debug/net6.0/Backend.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/obj/Debug/net6.0/Backend.csproj.FileListAbsolute.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Backend/obj/Debug/net6.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/obj/Debug/net6.0/apphost.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/obj/project.packagespec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Backend/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/obj/rider.project.restore.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Backend/obj/staticwebassets.pack.sentinel" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/obj/staticwebassets.pack.sentinel" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Frontend.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Frontend.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Students.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Students.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/SchoolarLevelsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/SchoolarLevelsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/StudentsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/StudentsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/SubLevelsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/SubLevelsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/Frontend.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/Frontend.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Students/AllStudents.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Students/AllStudents.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/Frontend.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/Frontend.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/Frontend.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/Frontend.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/Frontend.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/Frontend.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/apphost.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Frontend.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Frontend.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.packagespec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/staticwebassets.pack.sentinel" beforeDir="false" afterPath="$PROJECT_DIR$/obj/staticwebassets.pack.sentinel" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,26 +48,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\diego\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\diego\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\diego\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\diego\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\diego\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\diego\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Frontend">
     <configuration name="Frontend" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Frontend.csproj" />
@@ -124,6 +111,8 @@
       <workItem from="1715396226873" duration="574000" />
       <workItem from="1715468339584" duration="154000" />
       <workItem from="1715711019320" duration="5219000" />
+      <workItem from="1716317014205" duration="1458000" />
+      <workItem from="1716483113740" duration="546000" />
     </task>
     <servers />
   </component>
