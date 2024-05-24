@@ -73,7 +73,7 @@ public class NotesRepo : INotesRepo
         }
     }
 
-    public async Task<int> AddAsync(Notes entity)
+    public async Task<Notes> AddAsync(Notes entity)
     {
         var sql = "INSERT INTO Notes(noteN, idStudentN, idSubjectFullN) VALUES (@noteN, @idStudentN, @idSubjectFullN)";
 
@@ -87,12 +87,12 @@ public class NotesRepo : INotesRepo
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.ExecuteAsync(sql, parameters);
-            return result;
+            await connection.ExecuteAsync(sql, parameters);
+            return entity;
         }
     }
 
-    public async Task<int> UpdateAsync(Notes entity)
+    public async Task UpdateAsync(Notes entity)
     {
         var sql = "UPDATE Notes SET noteN = @noteN, idStudentN = @idStudentN, idSubjectFullN = @idSubjectFullN WHERE idNote = @idNote";
 
@@ -107,8 +107,7 @@ public class NotesRepo : INotesRepo
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.ExecuteAsync(sql, parameters);
-            return result;
+            await connection.ExecuteAsync(sql, parameters);
         }
     }
 

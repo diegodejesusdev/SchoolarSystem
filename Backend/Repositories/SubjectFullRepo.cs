@@ -61,7 +61,7 @@ public class SubjectFullRepo : ISubjectFullRepo
         }
     }
 
-    public async Task<int> AddAsync(SubjectFull entity)
+    public async Task<SubjectFull> AddAsync(SubjectFull entity)
     {
         var sql = "INSERT INTO SubjectFull(yearSf, idScheduleSf, idSubjectSf, idTeacherSf) " +
                   "VALUES (@yearSf, @idScheduleSf, @idSubjectSf, @idTeacherSf)";
@@ -77,12 +77,12 @@ public class SubjectFullRepo : ISubjectFullRepo
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.ExecuteAsync(sql, parameters);
-            return result;
+            await connection.ExecuteAsync(sql, parameters);
+            return entity;
         }
     }
 
-    public async Task<int> UpdateAsync(SubjectFull entity)
+    public async Task UpdateAsync(SubjectFull entity)
     {
         var sql = "UPDATE SubjectFull SET yearSf = @yearSf, idScheduleSf = @idScheduleSf, " +
                   "idSubjectSf = @idSubjectSf, idTeacherSf = @idTeacherSf WHERE idSubjectFull = @idSubjectFull";
@@ -99,8 +99,7 @@ public class SubjectFullRepo : ISubjectFullRepo
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.ExecuteAsync(sql, parameters);
-            return result;
+            await connection.ExecuteAsync(sql, parameters);
         }
     }
 

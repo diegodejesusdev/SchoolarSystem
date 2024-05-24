@@ -35,6 +35,14 @@ public class StudentsRepo : IStudentsRepo
 
     public async Task<Students> GetByIdAsync(int id)
     {
+        var sql = "SELECT * FROM Students WHERE idStudent = @Id";
+        using (var connection = new SqliteConnection(_connectionString))
+        {
+            return await connection.QueryFirstOrDefaultAsync<Students>(sql, new { Id = id });
+        }
+    }   
+    /*public async Task<Students> GetByIdAsync(int id)
+    {
         var sql = "SELECT * FROM Students st " +
                   "JOIN SchoolarLevels sl ON st.idSchoolarLevelS = sl.idSchoolarLevel " +
                   "JOIN SubLevels su ON sl.idSublevelSL = su.idSublevel WHERE idStudent = @Id"; 
@@ -51,9 +59,9 @@ public class StudentsRepo : IStudentsRepo
                 }, new {Id = id}, splitOn: "idSchoolarLevel, idSublevel");
             return result.FirstOrDefault();
         }
-    }
+    }*/
     
-    public async Task<int> AddAsync(Students entity)
+    public async Task<Students> AddAsync(Students entity)
     {
         var sql = "INSERT INTO Students(nameStudent, ccStudent, emailStudent, phoneStudent, idSchoolarLevelS) " +
                   "VALUES(@nameStudent, @ccStudent, @emailStudent, @phoneStudent, @idSchoolarLevelS)";
@@ -70,12 +78,12 @@ public class StudentsRepo : IStudentsRepo
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.ExecuteAsync(sql, parameters);
-            return result;
+            await connection.ExecuteAsync(sql, parameters);
+            return entity;
         }
     }
 
-    public async Task<int> UpdateAsync(Students entity)
+    public async Task UpdateAsync(Students entity)
     {
         var sql = "UPDATE Students SET nameStudent = @nameStudent, ccStudent = @ccStudent, " +
                   "emailStudent = @emailStudent, phoneStudent = @phoneStudent, idSchoolarLevelS = @idSchoolarLevelS " +
@@ -94,8 +102,7 @@ public class StudentsRepo : IStudentsRepo
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.ExecuteAsync(sql, parameters);
-            return result;
+            await connection.ExecuteAsync(sql, parameters);
         }
     }
 

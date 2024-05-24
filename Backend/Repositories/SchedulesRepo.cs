@@ -35,25 +35,24 @@ public class SchedulesRepo : ISchedulesRepo
         }
     }
 
-    public async Task<int> AddAsync(Schedules entity)
+    public async Task<Schedules> AddAsync(Schedules entity)
     {
         var sql = "INSERT INTO Schedules(startTimeSchedule, endTimeSchedule, daySchedule) VALUES (@startTimeSchedule, @endTimeSchedule, @daySchedule)";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.ExecuteAsync(sql, entity);
-            return result;
+            await connection.ExecuteAsync(sql, entity);
+            return entity;
         }
     }
 
-    public async Task<int> UpdateAsync(Schedules entity)
+    public async Task UpdateAsync(Schedules entity)
     {
         var sql = "UPDATE Schedules SET startTimeSchedule = @startTimeSchedule, endTimeSchedule = @endTimeSchedule, daySchedule = @daySchedule WHERE idSchedule = @idSchedule";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.ExecuteAsync(sql, entity);
-            return result;
+            await connection.ExecuteAsync(sql, entity);
         }
     }
 

@@ -72,7 +72,7 @@ public class ClassRepo : IClassRepo
         }
     }
 
-    public async Task<int> AddAsync(Class entity)
+    public async Task<Class> AddAsync(Class entity)
     {
         var sql = "INSERT INTO Class(classroomClass, idSchoolarLevelC, idSubjectFullC) " +
                   "VALUES (@classroomClass, @idSchoolarLevelC, @idSubjectFullC)";
@@ -87,12 +87,12 @@ public class ClassRepo : IClassRepo
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.ExecuteAsync(sql, parameters);
-            return result;
+            await connection.ExecuteAsync(sql, parameters);
+            return entity;
         }
     }
 
-    public async Task<int> UpdateAsync(Class entity)
+    public async Task UpdateAsync(Class entity)
     {
         var sql = "UPDATE Class SET classroomClass = @classroomClass, idSchoolarLevelC = @idSchoolarLevelC, " +
                   "idSubjectFullC = @idSubjectFullC WHERE idClass = @idClass;";
@@ -108,8 +108,7 @@ public class ClassRepo : IClassRepo
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.ExecuteAsync(sql, parameters);
-            return result;
+            await connection.ExecuteAsync(sql, parameters);
         }
     }
 

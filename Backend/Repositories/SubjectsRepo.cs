@@ -34,25 +34,24 @@ public class SubjectsRepo : ISubjectsRepo
         }
     }
 
-    public async Task<int> AddAsync(Subjects entity)
+    public async Task<Subjects> AddAsync(Subjects entity)
     {
         var sql = "INSERT INTO Subjects(nameSubject, infoSubject) VALUES (@nameSubject, @infoSubject);";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.ExecuteAsync(sql, entity);
-            return result;
+            await connection.ExecuteAsync(sql, entity);
+            return entity;
         }
     }
 
-    public async Task<int> UpdateAsync(Subjects entity)
+    public async Task UpdateAsync(Subjects entity)
     {
         var sql = "UPDATE Subjects SET nameSubject = @nameSubject, infoSubject = @infoSubject WHERE idSubject = @idSubject";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.ExecuteAsync(sql, entity);
-            return result;
+            await connection.ExecuteAsync(sql, entity);
         }
     }
 

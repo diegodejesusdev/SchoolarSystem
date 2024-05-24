@@ -35,25 +35,24 @@ public class SubLevelsRepo : ISublevelsRepo
         }
     }
 
-    public async Task<int> AddAsync(SubLevels entity)
+    public async Task<SubLevels> AddAsync(SubLevels entity)
     {
         var sql = "INSERT INTO SubLevels(nameSublevel, yearSublevel) VALUES (@nameSublevel, @yearSublevel)";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.ExecuteAsync(sql, entity);
-            return result;
+            await connection.ExecuteAsync(sql, entity);
+            return entity;
         }
     }
 
-    public async Task<int> UpdateAsync(SubLevels entity)
+    public async Task UpdateAsync(SubLevels entity)
     {
         var sql = "UPDATE SubLevels SET nameSublevel = @nameSublevel, yearSublevel = @yearSublevel WHERE idSublevel = @idSublevel";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.ExecuteAsync(sql, entity);
-            return result;
+            await connection.ExecuteAsync(sql, entity);
         }
     }
 

@@ -27,26 +27,21 @@ public class StudentsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Students>> Post(Students students)
+    public async Task<ActionResult<Students>> Post( [FromBody] Students students)
     {
         var newStudent = await _studentsRepo.AddAsync(students);
-        return NoContent();
+        return CreatedAtAction(nameof(GetAll), new { id = newStudent.idStudent }, newStudent);
     }
 
     [HttpPut("{idStudent:int}")]
     public async Task<ActionResult> Put(int idStudent, [FromBody] Students students)
     {
-        var StudentsUpdate = await _studentsRepo.GetByIdAsync(idStudent);
-        if (StudentsUpdate == null) 
-            return NotFound();
+        if (idStudent != students.idStudent)
+        {
+            return BadRequest();
+        }
 
-        StudentsUpdate.nameStudent = students.nameStudent;
-        StudentsUpdate.ccStudent = students.ccStudent;
-        StudentsUpdate.emailStudent = students.emailStudent;
-        StudentsUpdate.phoneStudent = students.phoneStudent;
-        StudentsUpdate.idSchoolarLevelS = students.idSchoolarLevelS;
-        
-        await _studentsRepo.UpdateAsync(StudentsUpdate);
+        await _studentsRepo.UpdateAsync(students);
         return NoContent();
     }
 
