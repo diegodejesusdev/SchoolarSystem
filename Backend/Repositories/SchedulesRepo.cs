@@ -56,14 +56,13 @@ public class SchedulesRepo : ISchedulesRepo
         }
     }
 
-    public async Task<int> DeleteAsync(int id)
+    public async Task DeleteAsync(int id)
     {
         var sql = "DELETE FROM Schedules WHERE idSchedule = @Id";
         using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
-            var result = await connection.ExecuteAsync(sql, new { Id = id });
-            return result;
+            await connection.ExecuteAsync(sql, new { Id = id });
         }
     }
 }

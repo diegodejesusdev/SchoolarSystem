@@ -8,6 +8,6 @@ public interface IRepository<T> where T : class
     Task<T> GetByIdAsync(int id);
     Task<T> AddAsync(T entity);
     Task UpdateAsync(T entity);
-    Task<int> DeleteAsync(int id);
+    Task DeleteAsync(int id);
 }
 
