@@ -1,0 +1,319 @@
+﻿@page "/students/{idStudent:int}"
+@page "/students/addStudent>"
+
+@using Frontend.Models
+@using Frontend.Services
+@using Components
+@using Blazored.Toast.Services
+@using Blazored.Modal.Services
+@using Blazored.Modal
+@using System
+
+@inject IStudentsService _StudentsService
+@inject ISchoolarLevelsService _SchoolarLevelsService
+@inject ISubLevelsService _SubLevelsService
+@inject IToastService _ToastService
+@inject NavigationManager Navigation
+
+<div class="container d-flex justify-content-center m-0 p-0">
+    <EditForm Model="@student" OnValidSubmit="@HandleOnValidSubmit" class="col-sm-12 col-md-10 col-lg-8 p-0">
+        <DataAnnotationsValidator />
+        <div class="card">
+            <div class="card-header">
+                <h3>Students - Detail: @student.nameStudent</h3>
+            </div>
+
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="name" class="form-label">Name</label>
+                    <InputText id="name" @bind-Value="student.nameStudent" class="form-control" placeholder="Name" />
+                    <ValidationMessage For="@(() => student.nameStudent)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="cc" class="form-label">Identification</label>
+                    <InputText id="cc" @bind-Value="student.ccStudent" class="form-control" placeholder="Identification" />
+                    <ValidationMessage For="@(() => student.ccStudent)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <InputText id="email" @bind-Value="student.emailStudent" class="form-control" placeholder="Email" />
+                    <ValidationMessage For="@(() => student.emailStudent)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="phone" class="form-label">Phone</label>
+                    <InputText id="phone" @bind-Value="student.phoneStudent" class="form-control" placeholder="Phone" />
+                    <ValidationMessage For="@(() => student.phoneStudent)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="scholarLevel" class="form-label">Scholar Level</label>
+                    <select class="form-control" @bind="student.idSchoolarLevelS">
+                        <option value="">Select a Level</option>
+                        @if (SchoolarLevelsList != null && SchoolarLevelsList.Any())
+                        {
+                        @foreach (var level in SchoolarLevelsList)
+                        {
+                        <option value="@level.idSchoolarLevel">@level.nameLevel</option>
+                        }
+                        }
+                    </select>
+                    <ValidationMessage For="@(() => student.idSchoolarLevelS)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="subLevel" class="form-label">SubScholar Level</label>
+                    <select class="form-control" @bind="student.SchoolarLevels.idSublevelSL">
+                        <option value="">Select a SubLevel</option>
+                        @if (SubLevelsList != null && SubLevelsList.Any())
+                        {
+                        @foreach (var level in SubLevelsList)
+                        {
+                        <option value="@level.idSublevel">@level.nameSublevel</option>
+                        }
+                        }
+                    </select>
+                    <ValidationMessage For="@(() => student.SchoolarLevels.idSublevelSL)" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-sm" hidden="@(idStudent == null)"><i class="fa fa-save pr-2"/> Save</button>
+                <button type="submit" class="btn btn-primary btn-sm" hidden="@(idStudent != null)"><i class="fa fa-save pr-2"/> Add</button>
+                <a href="students/allstudents" class="btn btn-danger btn-sm float-end" hidden="@(idStudent == null)" @onclick="(async () => await ShowConfirmationModal())"><i class="fa fa-trash pr-2" />Delete</a>
+            </div>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    [Parameter] public int? idStudent { get; set; }
+    public Students student = new Students();
+    public List<SchoolarLevels> SchoolarLevelsList { get; set; } = new List<SchoolarLevels>();
+    public List<SubLevels> SubLevelsList { get; set; } = new List<SubLevels>();
+    [CascadingParameter] IModalService _ModalService { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        SchoolarLevelsList = await _SchoolarLevelsService.GetSchoolarLevels();
+        SubLevelsList = await _SubLevelsService.GetSubLevels();
+
+        if (idStudent != null)
+        {
+            student = await _StudentsService.GetStudent(idStudent.Value);
+        }
+    }
+
+    private async Task HandleOnValidSubmit()
+    {
+        try
+        {
+            student.SchoolarLevels = SchoolarLevelsList.FirstOrDefault(x => x.idSchoolarLevel == student.idSchoolarLevelS);
+            if (student.SchoolarLevels != null)
+            {
+                student.SchoolarLevels.SubLevels = SubLevelsList.FirstOrDefault(x => x.idSublevel == student.SchoolarLevels.idSublevelSL);
+            }
+
+            if (idStudent != null)
+            {
+                await _StudentsService.UpdateStudent(idStudent.Value, student);
+            }
+            else
+            {
+                Students newStudent = await _StudentsService.AddStudent(student);
+                Navigation.NavigateTo($"/students/{newStudent.idStudent}");
+            }
+
+            _ToastService.ShowSuccess("Has been saved successfully");
+        }
+        catch (Exception e)
+        {
+            _ToastService.ShowError("There was an error while saving");
+        }
+    }
+
+    private async Task ShowConfirmationModal()
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("idStudent", idStudent);
+
+        var confirmationModal = _ModalService.Show<ConfirmationModal>("Delete Student?", parameters);
+        var result = await confirmationModal.Result;
+
+        if (!result.Cancelled)
+        {
+            _ToastService.ShowSuccess("Student has been removed!");
+            Navigation.NavigateTo("students/allstudents");
+        }
+    }
+
+}
+
+@*@page "/students/{idStudent:int}"
+@page "/students/create"
+
+@using Frontend.Models
+@using Frontend.Services
+@using Components
+@using Blazored.Toast.Services
+@using Blazored.Modal.Services
+@using Blazored.Modal
+
+@inject IStudentsService _StudentsService
+@inject ISchoolarLevelsService _SchoolarLevelsService
+@inject ISubLevelsService _SubLevelsService
+@inject IToastService _ToastService
+@inject NavigationManager Navigation
+
+<div class="container d-flex justify-content-center m-0 p-0">
+    <EditForm Model = "@student" OnValidSubmit="@HandleOnValidSubmit" class="col-sm-12 col-md-10 col-lg-8 p-0">
+        <DataAnnotationsValidator />
+        <div class = "card">
+            <div class="card-header">
+                <h3>Students - Detail: @student.nameStudent</h3>
+            </div>
+            
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="name" class="form-label">Name </label>
+                    <InputText id="name" @bind-Value="student.nameStudent" class="form-control" placehorder="Name" />
+                    <ValidationMessage For="@(() => student.nameStudent)"/>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="cc" class="form-label">Identification </label>
+                <InputText id="cc" @bind-Value="student.ccStudent" class="form-control" placeholder="Identification" />
+                <ValidationMessage For="@(() => student.ccStudent)"/>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="form-label">Email </label>
+                <InputText id="email" @bind-Value="student.emailStudent" class="form-control" placeholder="Email" />
+                <ValidationMessage For="@(() => student.emailStudent)"/>
+            </div>
+
+            <div class="form-group">
+                <label for="phone" class="form-label">Phone </label>
+                <InputText id="phone" @bind-Value="student.phoneStudent" class="form-control" placeholder="Phone" />
+                <ValidationMessage For="@(() => student.phoneStudent)"/>
+            </div>
+            
+            <div class="form-group">
+                <label for="scholarLevel" class="form-label">Scholar Level </label>
+                
+                <select class="form-control" @bind="@student.idSchoolarLevelS">
+                    <optgroup>
+                        <option value="">Select a Level</option>
+                        @if (SchoolarLevelsList != null)
+                        {
+                            @foreach (var level in SchoolarLevelsList)
+                            {
+                                <option value="@level.idSchoolarLevel">@level.nameLevel</option>
+                            }
+                        }
+                    </optgroup>
+                </select>
+                <ValidationMessage For="@(() => student.SchoolarLevels)" />
+            </div>
+
+            <div class="form-group">
+                <label for="subLevel" class="form-label">SubScholar Level </label>
+
+                <select class="form-control" @bind="@student.SchoolarLevels.idSublevelSL">
+                    <optgroup>
+                        <option value="">Select a SubLevel</option>
+                        @if (SubLevelsList != null)
+                        {
+                            @foreach (var level in SubLevelsList)
+                            {
+                                <option value="@level.idSublevel">@level.nameSublevel</option>
+                            }
+                        }
+                    </optgroup>
+                </select>
+                <ValidationMessage For="@(() => student.SchoolarLevels.SubLevels)" />
+            </div>
+            
+            <br/>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-sm" hidden="@(idStudent == null)"><i class="fa fa-save pr-2"/> Save</button>
+                <button type="submit" class="btn btn-primary btn-sm" hidden="@(idStudent != null)"><i class="fa fa-save pr-2"/> Add</button>
+                <a href="students/allstudents" class="btn btn-danger btn-sm float-end" hidden="@(idStudent == null)" @onclick="(async () => await ShowConfirmationModal())"><i class="fa fa-trash pr-2" />Delete</a>
+            </div>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    [Parameter]
+    public int? idStudent { get; set; }
+    public Students student = new Students();
+    public List<SchoolarLevels> SchoolarLevelsList { get; set; } = new List<SchoolarLevels>();
+    public List<SubLevels> SubLevelsList { get; set; } = new List<SubLevels>();
+    [CascadingParameter] IModalService _ModalService { get; set; }
+    string ident;
+
+    protected override async Task OnInitializedAsync()
+    {
+        SchoolarLevelsList = await _SchoolarLevelsService.GetSchoolarLevels();
+        SubLevelsList = await _SubLevelsService.GetSubLevels();
+
+        if (idStudent != null)
+        {
+            student = await _StudentsService.GetStudent(idStudent.Value);
+        }
+    }
+
+    private async Task HandleOnValidSubmit()
+    {
+        try
+        {
+            student.SchoolarLevels = SchoolarLevelsList.FirstOrDefault(x =>x.idSchoolarLevel == student.idSchoolarLevelS);
+            student.SchoolarLevels.SubLevels = SubLevelsList.FirstOrDefault(x => x.idSublevel == student.SchoolarLevels.idSublevelSL);
+            if (idStudent != null)
+            {
+                Console.WriteLine("Update");
+                student.SchoolarLevels = new SchoolarLevels(){nameLevel = string.Empty, SubLevels = new SubLevels(){nameSublevel = string.Empty}};
+                string serializedString = System.Text.Json.JsonSerializer.Serialize(student);
+                Console.WriteLine(idStudent.Value);
+                Console.WriteLine(serializedString);
+                await _StudentsService.UpdateStudent(idStudent.Value, student);
+            }
+            else
+            {
+                student.SchoolarLevels = new SchoolarLevels(){nameLevel = string.Empty, SubLevels = new SubLevels(){nameSublevel = string.Empty}};
+
+                Students newStudent = await _StudentsService.AddStudent(student);
+                Console.WriteLine($"****** id{student.idStudent} name{student.nameStudent}");
+                Navigation.NavigateTo($"/students/{newStudent.idStudent}");
+                Console.WriteLine("Created new student");
+                string serializedString = System.Text.Json.JsonSerializer.Serialize(student);
+                Console.WriteLine(serializedString);
+            }
+            
+            _ToastService.ShowSuccess("Has been saved successfully");
+        }
+        catch (Exception e)
+        {
+            _ToastService.ShowError("There was an error while saving");
+        }
+    }
+
+    private async Task ShowConfirmationModal()
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("idStudent", idStudent);
+
+        var confirmationModal = _ModalService.Show<ConfirmationModal>("Delete Student?", parameters);
+        var result = await confirmationModal.Result;
+
+        if (!result.Cancelled)
+        {
+            _ToastService.ShowSuccess("Student has been removed!");
+            Navigation.NavigateTo($"student/AllStudents");
+        }
+    }
+}*@

@@ -13,11 +13,11 @@ public class SchoolarLevels
 
     public virtual SubLevels? SubLevels { get; set; }
 
-    SchoolarLevels()
+    /*SchoolarLevels()
     {
         nameLevel = String.Empty;
         SubLevels = null;
-    }
+    }*/
 
     public SchoolarLevels(int idSchoolarLevel, string nameLevel, int idSublevelSl, SubLevels? subLevels)
     {
@@ -25,5 +25,10 @@ public class SchoolarLevels
         this.nameLevel = nameLevel;
         idSublevelSL = idSublevelSl;
         SubLevels = subLevels;
+    }
+
+    public SchoolarLevels()
+    {
+     
     }
 }
